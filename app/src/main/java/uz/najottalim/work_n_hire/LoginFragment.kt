@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import uz.najottalim.work_n_hire.databinding.FragmentLoginBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
@@ -19,8 +21,13 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
     }
 
     override fun onCreateView(
@@ -32,11 +39,15 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.txtGoToRegister.setOnClickListener {
-            (activity as AuthenticationActivity).showFragment(RegisterFragment())
+            val action = LoginFragmentDirections.actionGlobalRegisterFragment()
+            navigateFragment(action)
         }
 
 
-        binding.btnLoginWithPhone.setOnClickListener { showFragment(PhoneVerificationFragment())}
+        binding.btnLoginWithPhone.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToPhoneVerificationFragment()
+            navigateFragment(action)
+        }
 
         binding.login.setOnClickListener {
 
@@ -102,10 +113,9 @@ class LoginFragment : Fragment() {
     }
 
 
-    fun showFragment(fragment: Fragment){
-        (activity as AuthenticationActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fLayout, fragment)
-            .commit()
+
+    fun navigateFragment(action: NavDirections){
+        findNavController().navigate(action)
     }
 
 }

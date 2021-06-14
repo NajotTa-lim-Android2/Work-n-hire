@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id("androidx.navigation.safeargs")
 
+    
 }
 
 android {
@@ -10,6 +12,8 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+        multiDexEnabled true
+
         applicationId "uz.najottalim.work_n_hire"
         minSdkVersion 21
         targetSdkVersion 30
@@ -51,6 +55,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -64,4 +69,7 @@ dependencies {
     // Jetpack Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
 }

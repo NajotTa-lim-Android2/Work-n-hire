@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "898150201777",
+    "project_id": "worknhire-2321c",
+    "storage_bucket": "worknhire-2321c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898150201777:android:badd45981701c9a712a590",
+        "android_client_info": {
+          "package_name": "uz.najottalim.work_n_hire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898150201777-ri9vsnpv9o0pjpd5ju1su0tf5jprap9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.najottalim.work_n_hire",
+            "certificate_hash": "ca076fe334e312933f56cd67269215d1a1c6576e"
+          }
+        },
+        {
+          "client_id": "898150201777-987otdgtof0v45d1hi3tdho5ckqsbe2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqXhOBExMsaYgS9dCSAMuitMEkEBXRqcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898150201777-987otdgtof0v45d1hi3tdho5ckqsbe2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
