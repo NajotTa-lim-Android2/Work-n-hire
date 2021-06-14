@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/workersFragment"
-        android:name="uz.najottalim.work_n_hire.WorkersFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistsFragment"
         android:label="fragment_workers"
-        tools:layout="@layout/fragment_workers" >
+        tools:layout="@layout/fragment_specialists" >
         <action
             android:id="@+id/action_workersFragment_to_moreInfoFragment"
             app:destination="@id/moreInfoFragment" />
