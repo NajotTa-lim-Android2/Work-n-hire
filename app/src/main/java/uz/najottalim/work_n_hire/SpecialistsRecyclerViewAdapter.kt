@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import uz.najottalim.work_n_hire.databinding.SpecialistsItemLayoutBinding
 import uz.najottalim.work_n_hire.profile_info.ProfileInfo
 
@@ -27,11 +28,15 @@ class SpecialistsRecyclerViewAdapter(private val profileInfoCallBack: ProfileInf
 
         holder.binding.apply {
 
-            tvSpecialistField.text = profileInfo.experience.position
+            tvSpecialistFiled.text = profileInfo.experience.position
 
             tvSpecialistName.text = profileInfo.general.lNameFname
 
             tvSpecialistLocation.text = profileInfo.general.location
+
+            Glide.with(imgSpecialistAvatar.context).asBitmap()
+                .load(profileInfo.general.avatar)
+                .into(imgSpecialistAvatar)
 
         }
 

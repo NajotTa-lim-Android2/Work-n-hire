@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation.xml"
-    app:startDestination="@id/workersFragment">
+    app:startDestination="@id/specialistsFragment">
 
-    <fragment
-        android:id="@+id/workersFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistsFragment"
-        android:label="fragment_workers"
-        tools:layout="@layout/fragment_specialists" >
-        <action
-            android:id="@+id/action_workersFragment_to_moreInfoFragment"
-            app:destination="@id/moreInfoFragment" />
-    </fragment>
     <fragment
         android:id="@+id/moreInfoFragment"
         android:name="uz.najottalim.work_n_hire.MoreInfoFragment"
         android:label="fragment_more_info"
-        tools:layout="@layout/fragment_more_info" />
+        tools:layout="@layout/fragment_more_info" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/specialistsFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistsFragment"
+        android:label="fragment_specialists"
+        tools:layout="@layout/fragment_specialists" >
+        <action
+            android:id="@+id/action_specialistsFragment_to_moreInfoFragment"
+            app:destination="@id/moreInfoFragment" />
+    </fragment>
 </navigation>

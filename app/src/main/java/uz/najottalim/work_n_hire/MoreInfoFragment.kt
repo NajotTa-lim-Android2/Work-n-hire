@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import timber.log.Timber
 import uz.najottalim.work_n_hire.databinding.FragmentMoreInfoBinding
-import uz.najottalim.work_n_hire.databinding.FragmentWorkersBinding
 
 class MoreInfoFragment : Fragment() {
 
@@ -14,15 +15,20 @@ class MoreInfoFragment : Fragment() {
 
     private val binding get() = _binding
 
+    private val args: MoreInfoFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Timber.d("${args.id}")
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMoreInfoBinding.inflate(inflater,container,false)
+        _binding = FragmentMoreInfoBinding.inflate(inflater, container, false)
         return _binding.root
     }
 
