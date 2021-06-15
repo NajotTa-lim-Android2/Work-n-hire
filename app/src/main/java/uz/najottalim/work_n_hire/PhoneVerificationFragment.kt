@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import uz.najottalim.work_n_hire.databinding.FragmentPhoneVerificationBinding
 import uz.najottalim.work_n_hire.databinding.FragmentRegisterBinding
 import com.google.android.gms.tasks.OnCompleteListener
@@ -36,8 +38,11 @@ class PhoneVerificationFragment : Fragment() {
 
     private var verificationCode = ""
 
+    lateinit var credential: PhoneAuthCredential
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -53,7 +58,6 @@ class PhoneVerificationFragment : Fragment() {
         var phoneNumber = ""
         binding.btnSendCodeAndLogin.setOnClickListener {
             if (binding.tilSmsCode.isGone) {
-                binding.tilSmsCode.visibility = View.VISIBLE
                 when {
                     TextUtils.isEmpty(
                         binding.edtPhoneNumber.text.toString().trim() { it <= ' ' }) -> {
@@ -67,6 +71,19 @@ class PhoneVerificationFragment : Fragment() {
                         phoneNumber =
                             binding.edtPhoneNumber.text.toString().trim() { it <= ' ' }
 
+                        val options = activity?.let {
+                            PhoneAuthOptions.newBuilder(auth)
+                                .setPhoneNumber(phoneNumber)       // Phone number to verify
+                                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                                .setActivity(it)
+                                .setCallbacks(callbacks)// Activity (for callback binding)
+                                .build()
+                        }
+
+                        if (options != null) {
+                            PhoneAuthProvider.verifyPhoneNumber(options)
+                        }
+                        binding.tilSmsCode.visibility = View.VISIBLE
 
 
                     }
@@ -80,23 +97,16 @@ class PhoneVerificationFragment : Fragment() {
                         ).show()
                     } else -> {
                     verificationCode = binding.edtSmsCode.text.toString().trim() {it <= ' '}
-                    val options = activity?.let {
-                        PhoneAuthOptions.newBuilder(auth)
-                            .setPhoneNumber(phoneNumber)       // Phone number to verify
-                            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                            .setActivity(it)
-                            .setCallbacks(callbacks)// Activity (for callback binding)
-                            .build()
-                    }
+                    credential = PhoneAuthProvider.getCredential(storedVerificationId!!, verificationCode)
 
-                    if (options != null) {
-                        PhoneAuthProvider.verifyPhoneNumber(options)
-                    }
+                    signInWithPhoneAuthCredential(credential)
                 }
                 }
             }
 
         }
+
+
 
         callbacks =
             object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -125,6 +135,7 @@ class PhoneVerificationFragment : Fragment() {
 
                     storedVerificationId = verificationId
                     resendToken = token
+
                 }
 
                 override fun onCodeAutoRetrievalTimeOut(p0: String) {
@@ -149,7 +160,9 @@ class PhoneVerificationFragment : Fragment() {
 
                         val user = task.result?.user
 
-                        startActivity(Intent(activity, MainActivity::class.java))
+                        val action = PhoneVerificationFragmentDirections
+                            .actionPhoneVerificationFragmentToMainActivity()
+                        navigateFragment(action)
                     } else {
                         Log.w("TAG", "signInWithCredential:failure", task.exception)
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -159,46 +172,15 @@ class PhoneVerificationFragment : Fragment() {
         }
     }
 
-    //    private fun updateUI(user: FirebaseUser? = auth.currentUser) {
-//
-//    }
-////
-//    override fun onStart() {
-//        super.onStart()
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        val currentUser = auth.currentUser
-//    if (currentUser != null) {
-//        startActivity(Intent(requireActivity(), MainActivity::class.java))
-//    }
-//    }
-////
-//    private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
-//        // [START verify_with_code]
-//        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
-//        // [END verify_with_code]
-//    }
-//
-    private fun resendVerificationCode(
-        phoneNumber: String,
-        token: PhoneAuthProvider.ForceResendingToken?
-    ) {
-        val optionsBuilder = activity?.let {
-            PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(phoneNumber)       // Phone number to verify
-                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                .setActivity(it)                 // Activity (for callback binding)
-                .setCallbacks(callbacks)
-        }          // OnVerificationStateChangedCallbacks
-        if (token != null) {
-            optionsBuilder?.setForceResendingToken(token) // callback's ForceResendingToken
-        }
-        if (optionsBuilder != null) {
-            PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
-        }
-    }
-
 
     companion object {
         private const val TAG = "PhoneAuthActivity"
     }
+
+
+
+    fun navigateFragment(action: NavDirections){
+        findNavController().navigate(action)
+    }
+
 }
