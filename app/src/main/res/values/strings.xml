@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Work-n-hire</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="senior_soft">Senior Software Developer (Re-advertised)</string>
+    <string name="company">Company:</string>
+    <string name="location">Location:</string>
+    <string name="mock_company"><![CDATA[I&M BANK]]></string>
+    <string name="field">Field:</string>
+    <string name="mock_specialist">Jaxadev</string>
+    <string name="mock_location">Uzbekistan, Tashkent</string>
+    <string name="mock_posted_time">Posted 3 days ago</string>
+    <string name="mock_views">420 Views</string>
 </resources>
