@@ -15,19 +15,19 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    lateinit var idToken: String
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
     }
 
     override fun onCreateView(
@@ -82,16 +82,10 @@ class LoginFragment : Fragment() {
                                         Snackbar.LENGTH_SHORT
                                     ).show()
 
-                                    val intent = Intent(activity, MainActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    intent.putExtra(
-                                        "user_id",
-                                        FirebaseAuth.getInstance().currentUser!!.uid
-                                    )
-                                    intent.putExtra("email_id", email)
-                                    startActivity(intent)
-                                    activity?.finish()
+                                    val firebaseUser = task.result?.user
+
+                                    navigateFragmentWithToken(getToken(firebaseUser!!))
+
                                 } else {
                                     Snackbar.make(
                                         binding.loginLayout,
@@ -115,7 +109,35 @@ class LoginFragment : Fragment() {
 
 
     fun navigateFragment(action: NavDirections){
+        findNavController().popBackStack(R.id.loginFragment, true)
         findNavController().navigate(action)
+    }
+
+    fun navigateFragmentWithToken(idToken: String){
+
+        val bundle = Bundle()
+        bundle.putString("idToken", idToken)
+
+        findNavController().popBackStack(R.id.loginFragment, true)
+        findNavController().navigate(R.id.blankFragment, bundle)
+    }
+
+    private fun getToken(user: FirebaseUser): String{
+        user.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    idToken = task.result?.token.toString()
+                } else {
+                    // Handle error -> task.getException();
+                }
+            }
+        return idToken
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

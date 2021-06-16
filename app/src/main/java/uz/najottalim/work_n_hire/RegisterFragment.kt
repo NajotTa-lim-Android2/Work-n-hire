@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavDirections
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
@@ -22,6 +24,8 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+    lateinit var idToken: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,14 +67,9 @@ class RegisterFragment : Fragment() {
                                     Snackbar.make(binding.registerLayout, "You were registered successfully",
                                         Snackbar.LENGTH_SHORT).show()
 
-                                    //val intent = Intent(activity, MainActivity::class.java)
-//                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                                    intent.putExtra("user_id", firebaseUser.uid)
-//                                    intent.putExtra("email_id", firebaseUser.email)
-//                                    startActivity(intent)
-                                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                                    navigateFragment(action)
-                                    activity?.finish()
+
+                                    navigateFragmentWithToken(getToken(firebaseUser!!))
+
                                 } else{
                                     Snackbar.make(binding.registerLayout,
                                         task.exception!!.message.toString(),
@@ -99,7 +98,34 @@ class RegisterFragment : Fragment() {
 
 
     fun navigateFragment(action: NavDirections){
-        findNavController().navigate(action)
+        findNavController().popBackStack(R.id.registerFragment, true)
+        findNavController().navigate(action,    )
     }
 
+    fun navigateFragmentWithToken(idToken: String){
+
+        val bundle = Bundle()
+        bundle.putString("idToken", idToken)
+
+        findNavController().popBackStack(R.id.loginFragment, true)
+        findNavController().navigate(R.id.blankFragment, bundle)
+    }
+
+    private fun getToken(user: FirebaseUser): String{
+        user.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    idToken = task.result?.token.toString()
+                } else {
+                    // Handle error -> task.getException();
+                }
+            }
+        return idToken
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

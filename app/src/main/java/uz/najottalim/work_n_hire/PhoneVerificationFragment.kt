@@ -1,26 +1,22 @@
 package uz.najottalim.work_n_hire
 
-import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import uz.najottalim.work_n_hire.databinding.FragmentPhoneVerificationBinding
-import uz.najottalim.work_n_hire.databinding.FragmentRegisterBinding
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import uz.najottalim.work_n_hire.databinding.FragmentPhoneVerificationBinding
 import java.util.concurrent.TimeUnit
 
 
@@ -39,6 +35,8 @@ class PhoneVerificationFragment : Fragment() {
     private var verificationCode = ""
 
     lateinit var credential: PhoneAuthCredential
+
+    lateinit var idToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,7 +111,8 @@ class PhoneVerificationFragment : Fragment() {
 
                 override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                     Log.d("TAG", "onVerificationCompleted:$credential")
-                    signInWithPhoneAuthCredential(credential)
+
+
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
@@ -158,11 +157,11 @@ class PhoneVerificationFragment : Fragment() {
                     if (task.isSuccessful) {
                         Log.d("TAG", "signInWithCredential:success")
 
-                        val user = task.result?.user
+                        val firebaseUser = task.result?.user
 
-                        val action = PhoneVerificationFragmentDirections
-                            .actionPhoneVerificationFragmentToMainActivity()
-                        navigateFragment(action)
+                        signInWithPhoneAuthCredential(credential)
+
+                        navigateFragmentWithToken(getToken(firebaseUser!!))
                     } else {
                         Log.w("TAG", "signInWithCredential:failure", task.exception)
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -178,9 +177,30 @@ class PhoneVerificationFragment : Fragment() {
     }
 
 
+    private fun getToken(user: FirebaseUser): String{
+        user.getIdToken(true)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    idToken = task.result?.token.toString()
+                } else {
+                    // Handle error -> task.getException();
+                }
+            }
+        return idToken
+    }
 
-    fun navigateFragment(action: NavDirections){
-        findNavController().navigate(action)
+    fun navigateFragmentWithToken(idToken: String){
+
+        val bundle = Bundle()
+        bundle.putString("idToken", idToken)
+
+        findNavController().popBackStack(R.id.loginFragment, true)
+        findNavController().navigate(R.id.blankFragment, bundle)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
