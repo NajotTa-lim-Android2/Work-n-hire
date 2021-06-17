@@ -44,11 +44,5 @@
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" />
     <action android:id="@+id/action_global_blankFragment" app:destination="@id/blankFragment" />
-    <activity
-        android:id="@+id/splashScreenActivity"
-        android:name="uz.najottalim.work_n_hire.SplashScreenActivity"
-        android:label="activity_splash_screen"
-        tools:layout="@layout/activity_splash_screen" />
-
 
 </navigation>

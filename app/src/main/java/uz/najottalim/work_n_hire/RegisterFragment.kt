@@ -24,7 +24,7 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    lateinit var idToken: String
+    private var idToken: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,6 @@ class RegisterFragment : Fragment() {
     ): View? {
 
         _binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
-
 
 
         binding.register.setOnClickListener {

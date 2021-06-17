@@ -36,7 +36,7 @@ class PhoneVerificationFragment : Fragment() {
 
     lateinit var credential: PhoneAuthCredential
 
-    lateinit var idToken: String
+    private var idToken: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

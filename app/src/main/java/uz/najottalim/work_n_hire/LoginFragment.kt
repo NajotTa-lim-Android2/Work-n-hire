@@ -21,7 +21,7 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    lateinit var idToken: String
+    private var idToken: String = ""
 
 
 
