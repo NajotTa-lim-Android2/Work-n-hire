@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showFragment(action: NavDirections){
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment1) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         navController.navigate(action)
     }
