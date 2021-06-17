@@ -17,14 +17,13 @@ class MainActivity : AppCompatActivity() {
             val action = LoginFragmentDirections.actionGlobalBlankFragment()
             showFragment(action)
         } else {
-
             val action = LoginFragmentDirections.actionGlobalLoginFragment()
             showFragment(action)
         }
     }
 
 
-    fun showFragment(action: NavDirections){
+    private fun showFragment(action: NavDirections){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         navController.navigate(action)
