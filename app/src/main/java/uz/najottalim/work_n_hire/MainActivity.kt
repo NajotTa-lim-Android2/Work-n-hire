@@ -1,5 +1,7 @@
 package uz.najottalim.work_n_hire
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavDirections
@@ -20,8 +22,21 @@ class MainActivity : AppCompatActivity() {
             val action = LoginFragmentDirections.actionGlobalLoginFragment()
             showFragment(action)
         }
-    }
 
+
+        val sharedPreferences =
+            getSharedPreferences(getString(R.string.preferences_name), Context.MODE_PRIVATE)
+
+        if (sharedPreferences.getBoolean(getString(R.string.key_is_hr),false)){
+            val intent = Intent(this, HumanResourceActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            val intent = Intent(this, SpecialistActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
 
     private fun showFragment(action: NavDirections){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

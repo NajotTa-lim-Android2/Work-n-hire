@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/specialist_resource_navigation.xml"
+    app:startDestination="@id/specialistActivityFragment">
+
+    <fragment
+        android:id="@+id/specialistActivityFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistActivityFragment"
+        android:label="Activity"
+        tools:layout="@layout/fragment_specialist_activity" />
+    <fragment
+        android:id="@+id/specialistChatFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_specialist_chat" />
+    <fragment
+        android:id="@+id/specialistFavoriteFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistFavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_specialist_favorite" />
+    <fragment
+        android:id="@+id/specialistJobsFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistJobsFragment"
+        android:label="Jobs"
+        tools:layout="@layout/fragment_specialist_jobs" />
+    <fragment
+        android:id="@+id/specialistSettingsFragment"
+        android:name="uz.najottalim.work_n_hire.SpecialistSettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_specialist_settings" />
+</navigation>

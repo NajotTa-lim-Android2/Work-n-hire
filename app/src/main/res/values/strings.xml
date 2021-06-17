@@ -9,4 +9,6 @@
     <string name="vacancy">Vacancy</string>
     <string name="chat">Chat</string>
     <string name="settings">Settings</string>
+    <string name="jobs">Jobs</string>
+    <string name="activity">Activity</string>
 </resources>
