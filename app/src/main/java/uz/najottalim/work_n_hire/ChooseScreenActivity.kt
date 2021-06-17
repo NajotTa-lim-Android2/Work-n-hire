@@ -20,7 +20,11 @@ class ChooseScreenActivity : AppCompatActivity() {
 
 
         if (sharedPreferences.getBoolean(getString(R.string.key_is_hr),false)){
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HumanResourceActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            val intent = Intent(this, HumanResourceActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -31,7 +35,7 @@ class ChooseScreenActivity : AppCompatActivity() {
             editor.putBoolean(getString(R.string.key_is_hr), true)
             editor.apply()
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HumanResourceActivity::class.java)
             startActivity(intent)
             finish()
         }

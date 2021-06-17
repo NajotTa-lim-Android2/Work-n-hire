@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/human_resource_navigation.xml"
+    app:startDestination="@id/hrFragmentHome">
+
+    <fragment
+        android:id="@+id/hrFragmentHome"
+        android:name="uz.najottalim.work_n_hire.HrFragmentHome"
+        android:label="Home"
+        tools:layout="@layout/fragment_hr_home" />
+    <fragment
+        android:id="@+id/hrFragmentFavorite"
+        android:name="uz.najottalim.work_n_hire.HrFragmentFavorite"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_hr_favorite" />
+    <fragment
+        android:id="@+id/hrChatFragment"
+        android:name="uz.najottalim.work_n_hire.HrChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_hr_chat" />
+    <fragment
+        android:id="@+id/hrSettingsFragment"
+        android:name="uz.najottalim.work_n_hire.HrSettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_hr_settings" />
+    <fragment
+        android:id="@+id/hrVacancyFragment"
+        android:name="uz.najottalim.work_n_hire.HrVacancyFragment"
+        android:label="Vacancy"
+        tools:layout="@layout/fragment_hr_vacancy" />
+</navigation>
