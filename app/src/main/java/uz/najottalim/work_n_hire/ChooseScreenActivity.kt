@@ -19,25 +19,19 @@ class ChooseScreenActivity : AppCompatActivity() {
         val worker_btn = findViewById<Button>(R.id.worker_btn)
 
 
-        if (sharedPreferences.getBoolean(getString(R.string.key_is_hr),false)){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
         hr_btn.setOnClickListener {
 
             val editor = sharedPreferences.edit()
             editor.putBoolean(getString(R.string.key_is_hr), true)
             editor.apply()
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HumanResourceActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         worker_btn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SpecialistActivity::class.java)
             startActivity(intent)
             finish()
         }

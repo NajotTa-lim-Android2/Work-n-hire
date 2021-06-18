@@ -44,5 +44,6 @@
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" />
     <action android:id="@+id/action_global_blankFragment" app:destination="@id/blankFragment" />
+    <include app:graph="@navigation/human_resource_navigation" />
 
 </navigation>
