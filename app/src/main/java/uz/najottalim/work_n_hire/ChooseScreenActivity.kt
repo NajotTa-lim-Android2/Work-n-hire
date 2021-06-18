@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import uz.najottalim.work_n_hire.hr.HumanResourceActivity
+import uz.najottalim.work_n_hire.specialist.SpecialistActivity
 
 class ChooseScreenActivity : AppCompatActivity() {
 

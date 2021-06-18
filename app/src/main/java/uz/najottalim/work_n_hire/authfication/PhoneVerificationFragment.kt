@@ -1,4 +1,4 @@
-package uz.najottalim.work_n_hire
+package uz.najottalim.work_n_hire.authfication
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
@@ -16,6 +15,7 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import uz.najottalim.work_n_hire.R
 import uz.najottalim.work_n_hire.databinding.FragmentPhoneVerificationBinding
 import java.util.concurrent.TimeUnit
 

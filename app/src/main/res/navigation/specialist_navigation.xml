@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/specialist_resource_navigation.xml"
-    app:startDestination="@id/specialistActivityFragment">
+    app:startDestination="@id/specialistJobsFragment">
 
     <fragment
         android:id="@+id/specialistActivityFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistActivityFragment"
+        android:name="uz.najottalim.work_n_hire.specialist.SpecialistActivityFragment"
         android:label="Activity"
         tools:layout="@layout/fragment_specialist_activity" />
     <fragment
         android:id="@+id/specialistChatFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistChatFragment"
+        android:name="uz.najottalim.work_n_hire.specialist.SpecialistChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_specialist_chat" />
     <fragment
         android:id="@+id/specialistFavoriteFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistFavoriteFragment"
+        android:name="uz.najottalim.work_n_hire.specialist.SpecialistFavoriteFragment"
         android:label="Favorite"
         tools:layout="@layout/fragment_specialist_favorite" />
     <fragment
         android:id="@+id/specialistJobsFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistJobsFragment"
+        android:name="uz.najottalim.work_n_hire.specialist.SpecialistJobsFragment"
         android:label="Jobs"
         tools:layout="@layout/fragment_specialist_jobs" />
     <fragment
         android:id="@+id/specialistSettingsFragment"
-        android:name="uz.najottalim.work_n_hire.SpecialistSettingsFragment"
+        android:name="uz.najottalim.work_n_hire.specialist.SpecialistSettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_specialist_settings" />
 </navigation>

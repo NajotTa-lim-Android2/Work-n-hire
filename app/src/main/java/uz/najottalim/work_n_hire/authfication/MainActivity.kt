@@ -1,4 +1,4 @@
-package uz.najottalim.work_n_hire
+package uz.najottalim.work_n_hire.authfication
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,9 @@ import android.util.Log
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.FirebaseAuth
-import timber.log.Timber
+import uz.najottalim.work_n_hire.R
+import uz.najottalim.work_n_hire.hr.HumanResourceActivity
+import uz.najottalim.work_n_hire.specialist.SpecialistActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +20,12 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
 
         if (user != null){
-            val action = LoginFragmentDirections.actionGlobalBlankFragment()
+            val action =
+                LoginFragmentDirections.actionGlobalBlankFragment()
             showFragment(action)
         } else {
-            val action = LoginFragmentDirections.actionGlobalLoginFragment()
+            val action =
+                LoginFragmentDirections.actionGlobalLoginFragment()
             showFragment(action)
         }
 

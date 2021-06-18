@@ -1,4 +1,4 @@
-package uz.najottalim.work_n_hire
+package uz.najottalim.work_n_hire.hr
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,26 +6,35 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import uz.najottalim.work_n_hire.databinding.ActivitySpecialistActivtyBinding
+import uz.najottalim.work_n_hire.R
+import uz.najottalim.work_n_hire.databinding.ActivityHumanResourceBinding
 
-class SpecialistActivity : AppCompatActivity() {
+class HumanResourceActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySpecialistActivtyBinding
+    private lateinit var binding: ActivityHumanResourceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySpecialistActivtyBinding.inflate(layoutInflater)
+        binding = ActivityHumanResourceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        setupNavigation()
 
 
     }
 
     private fun setupNavigation() {
-        val navController = findNavController(R.id.myNavHostFragmentSpecialist)
+        val navController = findNavController(R.id.myNavHostFragmentHr)
         binding.bottomNavigationView.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
+                R.id.hrFragmentHome,
+                R.id.hrFragmentFavorite,
+                R.id.hrVacancyFragment,
+                R.id.hrChatFragment,
+                R.id.hrSettingsFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

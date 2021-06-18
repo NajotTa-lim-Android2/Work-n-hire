@@ -1,5 +1,4 @@
-package uz.najottalim.work_n_hire
-import android.content.Intent
+package uz.najottalim.work_n_hire.authfication
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -16,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import uz.najottalim.work_n_hire.R
 
 class LoginFragment : Fragment() {
 
@@ -39,13 +39,15 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.txtGoToRegister.setOnClickListener {
-            val action = LoginFragmentDirections.actionGlobalRegisterFragment()
+            val action =
+                LoginFragmentDirections.actionGlobalRegisterFragment()
             navigateFragment(action)
         }
 
 
         binding.btnLoginWithPhone.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToPhoneVerificationFragment()
+            val action =
+                LoginFragmentDirections.actionLoginFragmentToPhoneVerificationFragment()
             navigateFragment(action)
         }
 

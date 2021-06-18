@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpecialistActivity">
+    tools:context=".specialist.SpecialistActivity">
 
     <fragment
         android:id="@+id/myNavHostFragmentSpecialist"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:navGraph="@navigation/specialist_resource_navigation" />
+        app:navGraph="@navigation/specialist_navigation" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

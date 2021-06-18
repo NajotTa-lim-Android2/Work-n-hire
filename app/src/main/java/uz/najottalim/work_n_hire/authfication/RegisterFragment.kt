@@ -1,6 +1,5 @@
-package uz.najottalim.work_n_hire
+package uz.najottalim.work_n_hire.authfication
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -8,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavDirections
-import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import uz.najottalim.work_n_hire.R
 import uz.najottalim.work_n_hire.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -84,12 +82,14 @@ class RegisterFragment : Fragment() {
         }
 
         binding.txtGoToLogin.setOnClickListener {
-            val action = RegisterFragmentDirections.actionGlobalLoginFragment()
+            val action =
+                RegisterFragmentDirections.actionGlobalLoginFragment()
             navigateFragment(action)
         }
 
         binding.btnRegisterWithPhone.setOnClickListener {
-            val action = RegisterFragmentDirections.actionRegisterFragmentToPhoneVerificationFragment2()
+            val action =
+                RegisterFragmentDirections.actionRegisterFragmentToPhoneVerificationFragment2()
             navigateFragment(action)
         }
         return binding.root
