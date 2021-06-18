@@ -25,13 +25,13 @@ class ChooseScreenActivity : AppCompatActivity() {
             editor.putBoolean(getString(R.string.key_is_hr), true)
             editor.apply()
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HumanResourceActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         worker_btn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SpecialistActivity::class.java)
             startActivity(intent)
             finish()
         }
