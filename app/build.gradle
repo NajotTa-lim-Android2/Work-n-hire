@@ -4,7 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     id("androidx.navigation.safeargs")
 
-    
+
 }
 
 android {
@@ -22,7 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 
@@ -43,20 +43,6 @@ android {
 
 dependencies {
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    def nav_version = "2.3.5"
-
-    def fragment_version = "1.3.4"
-
-
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-
-    implementation("androidx.fragment:fragment-ktx:$fragment_version")
-    implementation 'com.google.firebase:firebase-auth-ktx'
-
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -68,17 +54,36 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //Lifecycle
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
     // Jetpack Navigation
+    def nav_version = "2.3.5"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
+    //Paging
+    def paging_version = "3.0.0"
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
     //Timber
     implementation 'com.jakewharton.timber:timber:4.5.1'
 
-    //Firebase Firestore
-    implementation 'com.google.firebase:firebase-firestore-ktx'
+    //Fragment
+    def fragment_version = "1.3.4"
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
 
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    //Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    //Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    //Auth
+    implementation 'com.google.firebase:firebase-auth-ktx'
 
 }
