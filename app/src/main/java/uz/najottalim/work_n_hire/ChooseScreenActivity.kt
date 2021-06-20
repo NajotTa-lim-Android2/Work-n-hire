@@ -3,8 +3,11 @@ package uz.najottalim.work_n_hire
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import uz.najottalim.work_n_hire.hr.HumanResourceActivity
 import uz.najottalim.work_n_hire.specialist.SpecialistActivity
 
@@ -13,6 +16,7 @@ class ChooseScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_screen)
+
 
         val sharedPreferences =
             getSharedPreferences(getString(R.string.preferences_name), Context.MODE_PRIVATE)

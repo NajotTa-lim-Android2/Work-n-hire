@@ -1,4 +1,4 @@
-package uz.najottalim.work_n_hire.authfication
+package uz.najottalim.work_n_hire.authentication
 
 import android.content.Context
 import android.content.Intent
