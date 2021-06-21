@@ -1,14 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".hr.HrVacancyFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".hr.HrVacancyFragment"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/ll_hr_vacancy">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/vacancy" />
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:text="Add Vacancy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-medium"/>
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/heading_company_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Company Info"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_job_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Job Title">
+
+        <EditText
+            android:id="@+id/edt_job_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            tools:text="Android Developer"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_company_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Company Name">
+
+        <EditText
+            android:id="@+id/edt_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            tools:text="Janoff Co.ltd"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_company_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Company Email">
+
+        <EditText
+            android:id="@+id/edt_company_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            tools:text="Janoff Co.ltd"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_company_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Company Phonr Number">
+
+        <EditText
+            android:id="@+id/edt_company_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            tools:text="Janoff Co.ltd"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/heading_job_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Job Description"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+
+    <LinearLayout
+        android:id="@+id/ll_skills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add Skill"
+            android:layout_weight=".9">
+
+            <EditText
+                android:id="@+id/edt_skill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_gravity="start"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/add_skill_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add"
+            android:layout_gravity="end"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_skills_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        tools:text="MVVM, FireStore, Kotlin, Java, etc."/>
+
+
+    <TextView
+        android:id="@+id/heading_salary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Salary"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min: "
+            android:textSize="20sp"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_salaryFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="$"
+            android:inputType="number"
+            android:padding="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max: "
+            android:textSize="20sp"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_salaryTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="$"
+            android:padding="10dp"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/heading_addition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Extra"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+
+
+    <EditText
+        android:id="@+id/edt_addition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mention any extra information about the vacancy"/>
+
+
+    <Button
+        android:id="@+id/btn_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="publish"
+        android:layout_gravity="end"/>
+
+
+</LinearLayout>
