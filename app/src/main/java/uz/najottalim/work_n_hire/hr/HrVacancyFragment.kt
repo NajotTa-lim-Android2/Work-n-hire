@@ -1,60 +1,145 @@
-package uz.najottalim.work_n_hire.hr
+    package uz.najottalim.work_n_hire.hr
 
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.EditText
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import uz.najottalim.work_n_hire.R
+import uz.najottalim.work_n_hire.Vacancy
+import uz.najottalim.work_n_hire.databinding.FragmentHrVacancyBinding
+import uz.najottalim.work_n_hire.databinding.FragmentRegisterBinding
+import uz.najottalim.work_n_hire.hr.models.CompanyInfo
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+    private const val PARAM_uid = "uid"
+    private const val PARAM_hr_uid = "hr_uid"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HrVacancyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HrVacancyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    class HrVacancyFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        private var uid: String? = "null"
+        private var hr_uid: String? = "null"
+
+        private var _binding: FragmentHrVacancyBinding? = null
+        private val binding get() = _binding!!
+
+        lateinit var company_info: CompanyInfo
+        private var job_title: String = ""
+
+        private val required_skills: MutableList<String> = mutableListOf()
+
+        private var salaryFrom: Int = 0
+        private var salaryTo: Int = 0
+
+        private var addition: String = ""
+
+        private var publication_time: Long = 0L
+
+        private val docRef = FirebaseFirestore.getInstance()
+
+
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            arguments?.let {
+                uid = it.getString(PARAM_uid)
+                hr_uid = it.getString(PARAM_hr_uid)
+            }
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hr_vacancy, container, false)
-    }
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HrVacancyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HrVacancyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+            _binding = FragmentHrVacancyBinding.inflate(layoutInflater, container, false)
+
+            showSnackbar("the beginning")
+            binding.addSkillBtn.setOnClickListener {
+                when{
+                    TextUtils.isEmpty(binding.edtSkill.text.toString().trim(){it <= ' '}) ->{
+                        showSnackbar("Skill")
+                    } else -> {
+                    val currentSkill = binding.edtSkill.text.toString()
+                    required_skills.add(currentSkill)
+
+                    val allSkills = binding.txtSkillsDisplay.text.toString() + ", " + currentSkill
+                    binding.txtSkillsDisplay.text = allSkills
+
+                }
                 }
             }
+            binding.btnPublish.setOnClickListener {
+
+                when{
+                    TextUtils.isEmpty(binding.edtJobTitle.text.toString().trim(){it <= ' '}) -> {
+                        showSnackbar("Job Title")
+                    }
+                    TextUtils.isEmpty(binding.edtCompanyEmail.text.toString().trim(){it <= ' '}) -> {
+                        showSnackbar("Email")
+                    }
+                    TextUtils.isEmpty(binding.edtCompanyNumber.text.toString().trim(){it <= ' '}) -> {
+                        showSnackbar("Phone Number")
+                    }
+                    TextUtils.isEmpty(binding.edtCompanyName.text.toString().trim(){it <= ' '}) -> {
+                        showSnackbar("Company Name")
+                    }
+
+                    else ->{
+                        job_title = binding.edtJobTitle.text.toString()
+                        company_info = CompanyInfo(binding.edtCompanyName.text.toString(),
+                            binding.edtCompanyEmail.text.toString(),
+                            binding.edtCompanyNumber.text.toString(),
+                            "")
+
+                        salaryFrom = binding.edtSalaryFrom.text.toString().toInt()
+                        salaryTo = binding.edtSalaryTo.text.toString().toInt()
+                        addition = binding.edtAddition.text.toString()
+                        publication_time = Calendar.getInstance().timeInMillis
+
+                        val vacancy = Vacancy(uid!!,
+                            hr_uid!!,
+                            company_info,
+                            job_title,
+                            required_skills,
+                            salaryFrom,
+                            salaryTo,
+                            addition,
+                            publication_time
+                        )
+
+                        docRef.document("Vacancies/vacancy")
+                            .set(vacancy)
+                            .addOnCompleteListener(requireActivity(), OnCompleteListener {
+
+                            })
+                    }
+                }
+
+
+
+            }
+
+
+            return binding.root
+        }
+
+        private fun showSnackbar(snackbarMsg: String){
+            Snackbar.make(
+                (activity as HumanResourceActivity).findViewById<LinearLayout>(R.id.hr_activity_cons_layout),
+                "Please enter $snackbarMsg.",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
-}

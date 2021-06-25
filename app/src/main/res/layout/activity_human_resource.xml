@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".hr.HumanResourceActivity">
+    tools:context=".hr.HumanResourceActivity"
+    android:id="@+id/hr_activity_cons_layout">
 
     <fragment
         android:id="@+id/myNavHostFragmentHr"

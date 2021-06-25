@@ -1,4 +1,4 @@
-package uz.najottalim.work_n_hire.authfication
+package uz.najottalim.work_n_hire.authentication
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -15,6 +15,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import uz.najottalim.work_n_hire.R
 
 class LoginFragment : Fragment() {
@@ -28,6 +30,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
