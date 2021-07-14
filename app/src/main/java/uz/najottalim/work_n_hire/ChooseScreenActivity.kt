@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import uz.najottalim.work_n_hire.hr.HumanResourceActivity
+import uz.najottalim.work_n_hire.hr.models.CompanyInfo
+import uz.najottalim.work_n_hire.hr.models.HRVacancy
+import uz.najottalim.work_n_hire.network.HROperations
 import uz.najottalim.work_n_hire.specialist.SpecialistActivity
 
 class ChooseScreenActivity : AppCompatActivity() {
@@ -13,13 +16,11 @@ class ChooseScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_screen)
-
         val sharedPreferences =
             getSharedPreferences(getString(R.string.preferences_name), Context.MODE_PRIVATE)
 
         val hr_btn = findViewById<Button>(R.id.hr_button)
         val worker_btn = findViewById<Button>(R.id.worker_btn)
-
 
         hr_btn.setOnClickListener {
 
